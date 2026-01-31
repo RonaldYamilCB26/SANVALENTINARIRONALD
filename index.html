@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para mi San Valentín ❤️</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap");
+
+      :root {
+        --bg-light-pink: #fef0f3;
+        --primary-red: #e63946;
+        --text-dark: #333;
+        --heart-red: #ff4d6d;
+        --paper-color: #fffaf0;
+      }
+
+      body {
+        font-family: "Playfair Display", serif;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: var(--bg-light-pink);
+        overflow: hidden;
+        color: var(--text-dark);
+      }
+
+      .tiktok-container {
+        width: 100%;
+        max-width: 400px;
+        height: 100vh;
+        max-height: 850px;
+        position: relative;
+        background-color: white;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media (max-width: 480px) {
+        .tiktok-container {
+          max-height: 100vh;
+          max-width: 100%;
+        }
+      }
+
+      .screen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        padding-bottom: 80px;
+        box-sizing: border-box;
+        background-color: var(--bg-light-pink);
+        transition:
+          transform 0.5s ease-in-out,
+          opacity 0.5s ease-in-out;
+        transform: translateY(100%);
+        opacity: 0;
+        text-align: center;
+        overflow-y: auto;
+      }
+
+      @media (max-width: 480px) {
+        .screen {
+          padding-bottom: 100px;
+          justify-content: flex-start;
+          padding-top: 30px;
+        }
+      }
+
+      .screen.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .character-img {
+        width: 150px;
+        height: auto;
+        display: block;
+        margin: 0 auto 15px;
+        filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.1));
+      }
+
+      @media (max-width: 480px) {
+        .character-img {
+          width: 100px;
+          margin: 0 auto 10px;
+        }
+      }
+
+      .love-letter {
+        background-color: var(--paper-color);
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        position: relative;
+        width: 90%;
+        border: 1px solid #ddd;
+        background-image: linear-gradient(#e1e1e1 1px, transparent 1px);
+        background-size: 100% 25px;
+        line-height: 25px;
+        text-align: left;
+        font-family: "Dancing Script", cursive;
+        font-size: 19px;
+        cursor: pointer;
+      }
+
+      .love-letter::after {
+        content: "Haz click para continuar...";
+        position: absolute;
+        bottom: -35px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "Playfair Display", serif;
+        font-size: 12px;
+        color: var(--primary-red);
+        font-weight: bold;
+      }
+
+      .reason-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        width: 100%;
+        margin-top: 10px;
+      }
+      
+      @media (max-width: 480px) {
+        .reason-grid {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+      }
+      .reason-card {
+        background: white;
+        padding: 12px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        font-size: 13px;
+        border-left: 5px solid var(--heart-red);
+        text-align: left;
+      }
+
+      @media (max-width: 480px) {
+        .reason-card {
+          padding: 10px;
+          font-size: 12px;
+        }
+      }
+
+      .nav-footer {
+        position: absolute;
+        bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        gap: 10px;
+        left: 5%;
+      }
+
+      @media (max-width: 480px) {
+        .nav-footer {
+          bottom: 10px;
+          width: 95%;
+          left: 2.5%;
+        }
+      }
+
+      .btn-nav {
+        flex: 1;
+        background-color: #fff;
+        color: var(--primary-red);
+        border: 2px solid #ffccd5;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-size: 11px;
+      }
+
+      @media (max-width: 480px) {
+        .btn-nav {
+          padding: 12px 8px;
+          font-size: 11px;
+          border: 2px solid #ffccd5;
+        }
+      }
+
+      .btn-valentine {
+        background-color: var(--primary-red);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        margin: 8px;
+        border-radius: 25px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 90%;
+      }
+
+      #screen5 {
+        background-color: var(--primary-red);
+        color: white;
+      }
+      .locket-half {
+        background: #ffd700;
+        color: var(--primary-red);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        font-weight: bold;
+        border: 3px solid #b8860b;
+      }
+      /* CONTENEDOR DEL CORAZÓN CORREGIDO */
+      .heart-container {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        margin: 40px auto; /* Más margen para que no choquen los bordes */
+        background-color: white; 
+        transform: rotate(-45deg);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      }
+
+      /* Las curvas del corazón */
+      .heart-container::before,
+      .heart-container::after {
+        content: "";
+        width: 150px;
+        height: 150px;
+        background-color: white;
+        border-radius: 50%;
+        position: absolute;
+      }
+
+      /* Posición de los círculos */
+      .heart-container::before {
+        top: -75px; /* Mitad del tamaño */
+        left: 0;
+      }
+      .heart-container::after {
+        left: 75px; /* Mitad del tamaño */
+        top: 0;
+      }
+
+      /* La imagen dentro del corazón */
+      .heart-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: rotate(45deg) scale(1.1); /* Endereza y ajusta la foto */
+        position: relative;
+        z-index: 10;
+        /* Esto hace que la imagen herede la forma de corazón */
+        clip-path: inherit; 
+      }
+
+      /* Ajuste extra para asegurar que la imagen se corte */
+      .heart-container {
+          overflow: visible; /* Cambiado de hidden para permitir las orejas */
+      }
+      
+      /* Para que la imagen tome la forma, usamos una máscara simple */
+      .heart-container img {
+          border-radius: 5px; /* Un toque suave en la punta */
+          mask-image: radial-gradient(circle, white 100%, transparent 100%);
+      }
+      /* Estilo infalible para la foto en corazón */
+      .heart-photo-container {
+        width: 160px;
+        height: 160px;
+        margin: 20px auto;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      @media (max-width: 480px) {
+        .heart-photo-container {
+          width: 100px;
+          height: 100px;
+          margin: 10px auto;
+        }
+      }
+
+      .heart-photo-container img,
+      .heart-photo-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        -webkit-clip-path: polygon(50% 100%, 85% 70%, 95% 45%, 95% 25%, 80% 5%, 60% 10%, 50% 25%, 40% 10%, 20% 5%, 5% 25%, 5% 45%, 15% 70%);
+        clip-path: polygon(50% 100%, 85% 70%, 95% 45%, 95% 25%, 80% 5%, 60% 10%, 50% 25%, 40% 10%, 20% 5%, 5% 25%, 5% 45%, 15% 70%);
+      }
+      /* Estilo para el video en corazón - Screen 6 */
+      .heart-video-container {
+        width: 320px;
+        height: 320px;
+        margin: 20px auto;
+        clip-path: path('M160,296 C160,296 26,212 26,128 C26,80 68,38 116,38 C140,38 152,56 160,56 C168,56 180,38 204,38 C252,38 294,80 294,128 C294,212 168,296 160,296 Z');
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      }
+
+      .hearts-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        justify-items: center;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .heart-clip {
+        width: 130px;
+        height: 130px;
+        object-fit: cover;
+        clip-path: path('M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.568-3.956 4.407-4.457 5.719-4.457 2.213 0 5.281 1.4 5.281 5.191 0 4.105-5.37 8.863-11 14.402z');
+        transform: scale(5.5); /* Ajuste para que el clip-path llene el contenedor */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tiktok-container">
+      <div id="screen1" class="screen active">
+        <img
+          src="Imagenes/2f1ab4adffb51d6f565a2eeaea71cfa9.gif"
+          class="character-img"
+          alt="Cinnamoroll Carta"
+        />
+        <div class="love-letter" onclick="nextScreen()">
+          Querida <b>Ari ❤️</b>,<br />
+          Aunque este 14 la distancia nos gane por un ratito, no quería que el
+          día pasara sin recordarte lo especial que eres para mí. Escribo esto
+          porque hay algo que quiero decirte, algo que me hace mucha ilusión...
+          Te tengo una sorpresa.
+        </div>
+        <p style="margin-top: 45px">De, <b>Ronald</b></p>
+        <div class="nav-footer">
+          <button class="btn-nav" style="visibility: hidden">Anterior</button>
+          <button class="btn-nav" style="visibility: hidden">
+            Pag. Siguiente
+          </button>
+        </div>
+      </div>
+
+      <div id="screen2" class="screen">
+        <img
+          src="Imagenes/dudu-dudu-bubu.gif"
+          class="character-img"
+          alt="Bubu Dudu Juntos"
+        />
+        <h2
+          style="
+            font-family: &quot;Dancing Script&quot;;
+            color: var(--primary-red);
+            font-size: 32px;
+          "
+        >
+          Razones por la cual eres mi eleccion perfecta mi amor
+        </h2>
+        <div class="reason-grid">
+          <div class="reason-card">
+            1. Eres el sueño del que nunca quiero despertar . ❤️
+          </div>
+          <div class="reason-card">2. Eres mi lugar seguro. ❤️</div>
+          <div class="reason-card">
+            3. Segundos a tu lado valen mas que una eternidad. ❤️
+          </div>
+          <div class="reason-card">
+            4. Porque eres mi primer pensamiento al despertar y el último al
+            dormir. ❤️
+          </div>
+          <div class="reason-card">5. No imagino a nadie más a mi lado. ❤️</div>
+          <div class="reason-card">
+            6. Eres mi elección favorita en esta y en todas las vidas. ❤️
+          </div>
+        </div>
+        <div class="nav-footer">
+          <button class="btn-nav" onclick="prevScreen()">Pag. Anterior</button>
+          <button class="btn-nav" onclick="nextScreen()">Pag. Siguiente</button>
+        </div>
+      </div>
+
+      <div id="screen3" class="screen">
+        <img
+          src="Imagenes/d129e15254e7f9e75699435f2ad4ac61.png"
+          class="character-img"
+          alt="Cinnamoroll Corazones"
+        />
+        <h2 style="color: var(--primary-red)">
+          Señales para decir "SÍ" mi vida
+        </h2>
+        <div class="reason-card" style="width: 90%; margin: 5px">
+          Si cada vez que hablamos el mundo se detiene, es por algo.
+        </div>
+        <div class="reason-card" style="width: 90%; margin: 5px">
+          Si sabes que incluso a la distancia somos el mejor equipo del mundo.
+        </div>
+        <div class="reason-card" style="width: 90%; margin: 5px">
+          Si sientes que nadie te va a cuidar tanto como yo, es porque es
+          verdad.
+        </div>
+        <div class="reason-card" style="width: 90%; margin: 5px">
+          Si sientes que este amor no es casualidad, sino nuestro mejor acierto.
+        </div>
+        <div class="reason-card" style="width: 90%; margin: 5px">
+          Si no puedes evitar sonreír ahora mismo... ya tienes tu respuesta.
+        </div>
+
+        <div class="nav-footer">
+          <button class="btn-nav" onclick="prevScreen()">Pag. Anterior</button>
+          <button class="btn-nav" onclick="nextScreen()">Pag. Siguiente</button>
+        </div>
+      </div>
+
+      <div id="screen4" class="screen">
+        <img
+          src="Imagenes/3c5cf04a0d1934bf02081255fe6add81.gif"
+          class="character-img"
+          alt="Bubu Dudu Besito"
+        />
+        <h1
+          style="
+            font-family: &quot;Dancing Script&quot;;
+            color: var(--primary-red);
+            font-size: 40px;
+          "
+        >
+          ¿Quieres ser mi San Valentín?
+        </h1>
+        <button class="btn-valentine" onclick="showScreen(4)">
+          ¡SÍ, UN MILLÓN DE VECES SÍ! ❤️
+        </button>
+        <button class="btn-valentine" onclick="showScreen(4)">
+          ¡SÍ! POR SUPUESTO MIO AMOR ❤️
+        </button>
+        <div class="nav-footer">
+          <button class="btn-nav" onclick="prevScreen()">Pag. Anterior</button>
+          <button class="btn-nav" style="visibility: hidden">Siguiente</button>
+        </div>
+      </div>
+
+      <div id="screen5" class="screen">
+        <img src="Imagenes/db4345131f936497df83be20639da732.png" alt="Cinnamoroll con corazón" style="position: absolute; top: 15px; width: 100px; height: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
+        
+        <h1>¡CONFIRMADO!</h1>
+
+        <!-- Dos corazones arriba -->
+        <div style="display: flex; gap: 20px; justify-content: center; margin: 10px 0; flex-wrap: wrap;">
+          <div class="heart-photo-container" style="width: 110px; height: 110px;">
+            <img 
+              src="Imagenes/WhatsApp Image 2026-01-31 at 2.59.03 AM.jpeg" 
+              alt="Foto de Amor" 
+            />
+          </div>
+          <div class="heart-photo-container" style="width: 110px; height: 110px;">
+            <video style="width: 100%; height: 100%; object-fit: cover;" autoplay muted loop>
+              <source src="Imagenes/WhatsApp Video 2026-01-31 at 2.59.03 AM.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 30px; margin: 20px 0; justify-content: center; align-items: center;">
+          <span style="font-family: 'Dancing Script', cursive; font-size: 60px; font-weight: bold; color: #fff; text-shadow: 0 3px 6px rgba(0,0,0,0.3);">A</span>
+          <span style="font-size: 40px; color: #fff;">+</span>
+          <span style="font-family: 'Dancing Script', cursive; font-size: 60px; font-weight: bold; color: #fff; text-shadow: 0 3px 6px rgba(0,0,0,0.3);">R</span>
+        </div>
+
+        <!-- Un corazón abajo en el centro -->
+        <div style="display: flex; justify-content: center; margin: 10px 0;">
+          <div class="heart-photo-container" style="width: 110px; height: 110px;">
+            <img 
+              src="Imagenes/WhatsApp Image 2026-01-31 at 2.17.27 AM (1).jpeg" 
+              alt="Nuestra Foto" 
+            />
+          </div>
+        </div>
+
+        <p>Gracias por decir que sí mi amor. La distancia solo hace que nuestro amor sea mas fuerte. Cuento los días para estar a tu lado.<br /></p>
+
+        <div class="nav-footer">
+          <button class="btn-nav" onclick="prevScreen()">Pag. Anterior</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let current = 0;
+      const screens = document.querySelectorAll(".screen");
+
+      function showScreen(index) {
+        screens.forEach((s, i) => {
+          s.classList.remove("active");
+          if (i === index) s.classList.add("active");
+        });
+        current = index;
+      }
+
+      function nextScreen() {
+        if (current < screens.length - 1) showScreen(current + 1);
+      }
+
+      function prevScreen() {
+        if (current > 0) showScreen(current - 1);
+      }
+
+      // Script para que el GIF se repita cada 3 segundos
+      setInterval(function () {
+        const gifs = document.querySelectorAll(".character-img");
+        gifs.forEach((gif) => {
+          const src = gif.src;
+          gif.src = "";
+          gif.src = src;
+        });
+      }, 3000);
+    </script>
+  </body>
+</html>
